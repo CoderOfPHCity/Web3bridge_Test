@@ -64,6 +64,9 @@ const products = [
     const product = products.find(item => item.id === productId);
     const cartItem = cart.find(item => item.id === productId);
   
+    if (!product) {
+        throw new Error('Product not found');
+      }
     if (cartItem) {
       cartItem.quantity += 1;
     } else {
@@ -105,10 +108,10 @@ const products = [
     errorElement.textContent = message;
     errorElement.style.display = 'block';
   
-    // You can also consider adding a timeout to hide the error message after a few seconds
+   
     setTimeout(() => {
       errorElement.style.display = 'none';
-    }, 5000); // 5000 milliseconds (5 seconds) timeout
+    }, 5000); 
   }
   
   document.getElementById('applyCoupon').addEventListener('click', () => {
@@ -130,7 +133,7 @@ const products = [
   
       document.getElementById('totalAmount').textContent = `Total Amount (After 10% Discount): $${discountedAmount.toFixed(2)}`;
     } else {
-      alert('Invalid coupon code. Try again.');
+      alert('Invalid coupon code!. Try again.');
     }
   
     couponInput.value = '';
